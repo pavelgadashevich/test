@@ -1,0 +1,11 @@
+$bColor: #bbb;
+$color: #fff;
+
+body {
+    background:$bColor;
+    color:$color;
+    font:50px helvetica;
+    a {
+        color:$color;
+    }
+}

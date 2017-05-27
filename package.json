@@ -1,0 +1,26 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pavelgadashevich/test.git"
+  },
+  "author": "test",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pavelgadashevich/test/issues"
+  },
+  "homepage": "https://github.com/pavelgadashevich/test#readme",
+  "devDependencies": {
+    "browser-sync": "^2.18.12",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.4.0",
+    "gulp-sass": "^3.1.0"
+  }
+}
