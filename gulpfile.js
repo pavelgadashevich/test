@@ -27,11 +27,11 @@ var path = {
     basedir: 'app/'
 };
 
-
-// sync
+// watch
 //////////////////////
 
-gulp.task('sync', function() {
+// watch:server
+gulp.task('watch:server', function() {
     sync({
         server: {
             baseDir: path.basedir            
@@ -42,7 +42,8 @@ gulp.task('sync', function() {
     });
 });
 
-gulp.task('sass', function() {
+// watch:sass
+gulp.task('watch:sass', function() {
     return gulp.src(path.watch.scss)
         .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest(path.src.css))
@@ -51,32 +52,34 @@ gulp.task('sass', function() {
         }));
 });
 
-gulp.task('html', function() {
+// watch:html
+gulp.task('watch:html', function() {
     return gulp.src(path.src.html)
         .pipe(sync.reload({
             stream: true
         }));
 });
 
-// watch
-//////////////////////
-
-gulp.task('watch', ['sync','html','sass'], function() {
-    gulp.watch(path.watch.scss, ['sass']);
-    gulp.watch(path.watch.html, ['html']);
+// watch all
+gulp.task('watch', ['watch:server','watch:html','watch:sass'], function() {
+    gulp.watch(path.watch.scss, ['watch:sass']);
+    gulp.watch(path.watch.html, ['watch:html']);
 })
 
 // build
 //////////////////////
+
+// build:html
 gulp.task('build:css', function() {
     gulp.src(path.src.cssinput)
         .pipe(cleancss())        
         .pipe(gulp.dest(path.build.css));
 });
 
-// clean project
-gulp.task('clean', function() {
+// build:clean
+gulp.task('build:clean', function() {
     return del.sync(path.build.basedir);
 });
 
-gulp.task('build', ['clean', 'build:css']);
+// build all
+gulp.task('build', ['build:clean', 'build:css']);
