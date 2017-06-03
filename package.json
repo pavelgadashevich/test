@@ -19,8 +19,13 @@
   "devDependencies": {
     "browser-sync": "^2.18.12",
     "del": "^2.2.2",
+    "flexboxgrid-sass": "^8.0.5",
     "gulp": "^3.9.1",
     "gulp-clean-css": "^3.4.0",
+    "gulp-pug": "^3.3.0",
     "gulp-sass": "^3.1.0"
+  },
+  "dependencies": {
+    "flexboxgrid-sass": "^8.0.5"
   }
 }

@@ -4,6 +4,7 @@
 //////////////////////
 var gulp = require('gulp'),
     sass = require('gulp-sass'),
+    pug = require('gulp-pug'),
     sync = require('browser-sync'),
     cleancss = require('gulp-clean-css'),
     del = require('del');
@@ -13,16 +14,17 @@ var gulp = require('gulp'),
 var path = {
     src: { 
         html: 'app/*.html',
+        pug: 'app/pug/*.pug',
         css: 'app/css/',
         cssinput: 'app/css/**/*.css'
     },
     watch: {
-        html: 'app/**/*.html',
+        pug: 'app/pug/**/*.pug',
         scss: 'app/scss/**/*.scss'        
     },
     build: {
-        basedir: 'dist/',
-        css: 'dist/css/'
+        basedir: 'dest/',
+        css: 'dest/css/'
     },
     basedir: 'app/'
 };
@@ -52,18 +54,27 @@ gulp.task('watch:sass', function() {
         }));
 });
 
-// watch:html
-gulp.task('watch:html', function() {
-    return gulp.src(path.src.html)
+// watch:pug
+gulp.task('watch:pug', function() {
+    return gulp.src(path.src.pug)
+        .pipe(pug({
+            pretty: true
+        })
+        .on('error', function(error) {
+            console.log(error);
+            this.end();
+           })
+        )      
+        .pipe(gulp.dest(path.basedir))
         .pipe(sync.reload({
             stream: true
         }));
 });
 
 // watch all
-gulp.task('watch', ['watch:server','watch:html','watch:sass'], function() {
-    gulp.watch(path.watch.scss, ['watch:sass']);
-    gulp.watch(path.watch.html, ['watch:html']);
+gulp.task('watch', ['watch:server','watch:pug','watch:sass'], function() {
+    gulp.watch(path.watch.pug, ['watch:pug']);
+    gulp.watch(path.watch.scss, ['watch:sass']);    
 })
 
 // build
